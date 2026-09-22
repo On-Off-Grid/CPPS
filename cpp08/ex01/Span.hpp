@@ -19,11 +19,15 @@ public:
 
     void addNumber(int number);
 
+    // Range template method to add multiple elements using iterator range [begin, end)
     template <typename Iterator>
     void addNumbers(Iterator begin, Iterator end) {
+        // std::distance (<iterator>): calculates the number of element steps between begin and end iterators
+        // _numbers.size(): vector container method returning current number of stored elements
         if (std::distance(begin, end) + _numbers.size() > _n) {
             throw SpanFullException();
         }
+        // vector::insert (<vector>): inserts elements from range [begin, end) before the specified position (_numbers.end())
         _numbers.insert(_numbers.end(), begin, end);
     }
 

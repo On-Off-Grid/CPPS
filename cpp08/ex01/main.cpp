@@ -42,13 +42,16 @@ int main() {
 
     std::cout << "\n--- Large range test (100,000 elements) ---\n";
     Span sp_large(100000);
+    // std::vector: sequence container holding dynamically populated data
     std::vector<int> large_vec;
     std::srand(std::time(NULL));
     for (int i = 0; i < 100000; ++i) {
+        // vector::push_back(): container method appending element to vector
         large_vec.push_back(std::rand());
     }
     
     try {
+        // Passing iterator range [large_vec.begin(), large_vec.end()) to template addNumbers
         sp_large.addNumbers(large_vec.begin(), large_vec.end());
         std::cout << "Successfully added 100,000 numbers.\n";
         std::cout << "Shortest span: " << sp_large.shortestSpan() << "\n";
@@ -60,6 +63,7 @@ int main() {
     std::cout << "\n--- Add range exception test ---\n";
     Span sp_small(10);
     try {
+        // Random access iterator arithmetic (large_vec.begin() + 15) to pass range of 15 elements
         sp_small.addNumbers(large_vec.begin(), large_vec.begin() + 15);
     } catch (const std::exception& e) {
         std::cout << "Exception: " << e.what() << "\n";
